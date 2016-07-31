@@ -1,4 +1,5 @@
-project
-=======
+hmac-api-symfony
+================
 
-A Symfony project created on July 31, 2016, 8:50 pm.
+This sample project serves as a practical example on how to secure
+a RESTful API using the [UMAPsr7HmacBundle](https://github.com/1ma/UMAPsr7HmacBundle) package.
