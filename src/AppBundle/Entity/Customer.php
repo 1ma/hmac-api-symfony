@@ -33,6 +33,13 @@ class Customer implements UserInterface, ApiClientInterface
     private $username;
 
     /**
+     * @var ShippingAddress
+     *
+     * @ORM\Embedded(class="ShippingAddress")
+     */
+    private $shippingAddress;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="api_key", type="string", length=24, unique=true)
@@ -52,6 +59,7 @@ class Customer implements UserInterface, ApiClientInterface
     public function __construct(string $username)
     {
         $this->username = $username;
+        $this->shippingAddress = null;
         $this->apiKey = base64_encode(random_bytes(static::BYTES_OF_ENTROPY));
         $this->sharedSecret = base64_encode(random_bytes(static::BYTES_OF_ENTROPY));
     }
@@ -70,6 +78,30 @@ class Customer implements UserInterface, ApiClientInterface
     public function getUsername()
     {
         return $this->username;
+    }
+
+    /**
+     * @param ShippingAddress $shippingAddress
+     */
+    public function updateShippingAddress(ShippingAddress $shippingAddress)
+    {
+        $this->shippingAddress = $shippingAddress;
+    }
+
+    /**
+     * @return ShippingAddress|null
+     */
+    public function getShippingAddress()
+    {
+        return $this->shippingAddress;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasShippingAddress()
+    {
+        return null !== $this->shippingAddress;
     }
 
     /**

@@ -1,1 +1,5 @@
 services:
+    use_case.create_customer:
+        class: AppBundle\UseCase\CreateCustomerUseCase
+        arguments:
+            - '@doctrine.orm.default_entity_manager'
