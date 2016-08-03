@@ -22,4 +22,12 @@ class CustomerRepository extends EntityRepository
 
         return $query->getSingleResult();
     }
+
+    /**
+     * @return Customer[]
+     */
+    public function findAll()
+    {
+        return parent::findAll();
+    }
 }

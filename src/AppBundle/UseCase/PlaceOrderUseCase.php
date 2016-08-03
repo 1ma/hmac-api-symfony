@@ -29,8 +29,8 @@ class PlaceOrderUseCase
     public function execute(Customer $customer, string $productReference, int $quantity)
     {
         $this->em->transactional(function () use ($customer, $productReference, $quantity) {
-            $price = new Dollar(2999);
-            $fees = new Dollar(500);
+            $price = new Dollar(2999 * $quantity);
+            $fees = new Dollar(1000 + 500 * $quantity);
             $deliveryDate = new \DateTime('tomorrow');
 
             $this->em->persist(

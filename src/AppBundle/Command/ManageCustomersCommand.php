@@ -2,7 +2,6 @@
 
 namespace AppBundle\Command;
 
-use AppBundle\Entity\Customer;
 use AppBundle\Repository\CustomerRepository;
 use AppBundle\UseCase\CreateCustomerUseCase;
 use AppBundle\UseCase\Exception\UsernameTakenException;
@@ -63,8 +62,7 @@ class ManageCustomersCommand extends Command
         $this->assembleCustomerTable($output)->render();
 
         if (!$this->questionHelper->ask(
-            $input, $output,
-            new ConfirmationQuestion('Do you want to create a new customer? ')
+            $input, $output, new ConfirmationQuestion('Do you want to create a new customer? ', false)
         )) {
             return 0;
         }
@@ -79,13 +77,9 @@ class ManageCustomersCommand extends Command
      */
     private function assembleCustomerTable(OutputInterface $output)
     {
-        /** @var Customer[] $customers */
-        $customers = $this->customerRepository
-            ->findAll();
-
         $table = new Table($output);
         $table->setHeaders(['username', 'api key', 'shared secret', 'shipping address']);
-        foreach ($customers as $customer) {
+        foreach ($this->customerRepository->findAll() as $customer) {
             $table->addRow([
                 $customer->getUsername(),
                 $customer->getApiKey(),
@@ -106,8 +100,7 @@ class ManageCustomersCommand extends Command
     private function createCustomerFlow(InputInterface $input, OutputInterface $output)
     {
         $username = $this->questionHelper->ask(
-            $input, $output,
-            new Question('Enter the new customer username: ')
+            $input, $output, new Question('Enter the new customer username: ')
         );
 
         try {
