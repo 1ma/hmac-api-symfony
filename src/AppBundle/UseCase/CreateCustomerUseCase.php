@@ -27,14 +27,14 @@ class CreateCustomerUseCase
      * 
      * @throws UsernameTakenException
      */
-    public function execute($newUsername)
+    public function execute(string $newUsername)
     {
         try {
             $this->em->transactional(function () use ($newUsername) {
                 $this->em->persist(new Customer($newUsername));
             });
         } catch (UniqueConstraintViolationException $e) {
-            throw new UsernameTakenException($newUsername);
+            throw new UsernameTakenException($newUsername, $e);
         }
     }
 }

@@ -27,7 +27,7 @@ class UpdateShippingAddressUseCase
      * @param string   $newCity
      * @param string   $newPlace
      */
-    public function execute(Customer $customer, $newCountry, $newCity, $newPlace)
+    public function execute(Customer $customer, string $newCountry, string $newCity, string $newPlace)
     {
         $newShippingAddress = new ShippingAddress($newCountry, $newCity, $newPlace);
 

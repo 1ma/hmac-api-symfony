@@ -12,7 +12,7 @@ class CustomerRepository extends EntityRepository
      *
      * @return Customer|null
      */
-    public function findOneByUsername($username)
+    public function findOneByUsername(string $username)
     {
         $query = $this->_em->createQuery('
             SELECT c

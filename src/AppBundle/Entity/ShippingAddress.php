@@ -12,21 +12,21 @@ class ShippingAddress
     /**
      * @var string
      *
-     * @ORM\Column(name="country", type="string", length=255, nullable=true)
+     * @ORM\Column(name="country", type="string", length=2, nullable=true)
      */
     private $country;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="city", type="string", length=255, nullable=true)
+     * @ORM\Column(name="city", type="string", length=32, nullable=true)
      */
     private $city;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="place", type="string", length=255, nullable=true)
+     * @ORM\Column(name="place", type="string", length=128, nullable=true)
      */
     private $place;
 
@@ -35,7 +35,7 @@ class ShippingAddress
      * @param string $city
      * @param string $place
      */
-    public function __construct($country, $city, $place)
+    public function __construct(string $country, string $city, string $place)
     {
         $this->country = $country;
         $this->city = $city;
@@ -44,6 +44,7 @@ class ShippingAddress
 
     public function __toString()
     {
-        return sprintf('%s, %s, %s', $this->country, $this->city, $this->place);
+        return null === $this->country || null === $this->city || null === $this->place ?
+            '(unknown)' : sprintf('%s, %s, %s', $this->country, $this->city, $this->place);
     }
 }

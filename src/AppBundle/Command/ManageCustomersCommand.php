@@ -62,14 +62,14 @@ class ManageCustomersCommand extends Command
 
         $this->assembleCustomerTable($output)->render();
 
-        if ($this->questionHelper->ask(
+        if (!$this->questionHelper->ask(
             $input, $output,
             new ConfirmationQuestion('Do you want to create a new customer? ')
         )) {
-            return $this->createCustomerFlow($input, $output);
+            return 0;
         }
 
-        return 0;
+        return $this->createCustomerFlow($input, $output);
     }
 
     /**
@@ -84,10 +84,13 @@ class ManageCustomersCommand extends Command
             ->findAll();
 
         $table = new Table($output);
-        $table->setHeaders(['username', 'api key', 'shared secret']);
+        $table->setHeaders(['username', 'api key', 'shared secret', 'shipping address']);
         foreach ($customers as $customer) {
             $table->addRow([
-                $customer->getUsername(), $customer->getApiKey(), $customer->getSharedSecret(),
+                $customer->getUsername(),
+                $customer->getApiKey(),
+                $customer->getSharedSecret(),
+                (string) $customer->getShippingAddress(),
             ]);
         }
 

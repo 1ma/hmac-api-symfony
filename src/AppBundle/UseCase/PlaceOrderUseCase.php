@@ -26,7 +26,7 @@ class PlaceOrderUseCase
      *
      * @throws \DomainException
      */
-    public function execute(Customer $customer, $productReference, $quantity)
+    public function execute(Customer $customer, string $productReference, int $quantity)
     {
         $this->em->transactional(function () use ($customer, $productReference, $quantity) {
             $price = new Dollar(2999);

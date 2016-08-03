@@ -19,7 +19,7 @@ class Dollar
     public function __construct(int $amount)
     {
         if (0 > $amount) {
-            throw new \DomainException('get outta here');
+            throw new \DomainException('The Dollar value does not support negative dollar amounts');
         }
 
         $this->amount = $amount;

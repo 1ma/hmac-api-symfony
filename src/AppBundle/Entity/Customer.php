@@ -13,7 +13,9 @@ use UMA\Psr7HmacBundle\Definition\ApiClientInterface;
 class Customer implements UserInterface, ApiClientInterface
 {
     // A 18 byte sequence produces a 24 character long
-    // base64 string with not padding (trailing equal signs)
+    // base64 string with no padding (trailing equal signs).
+    // Moreover, 18 bytes equal 144 bits which is even more than
+    // what a standard UUID has (128 bits of entropy).
     const BYTES_OF_ENTROPY = 18;
 
     /**
