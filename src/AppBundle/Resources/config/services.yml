@@ -18,6 +18,11 @@ services:
         arguments:
             - 'AppBundle:ProductOrder'
 
+    subs.json_pescada:
+        class: AppBundle\EventListener\JsonGuard
+        tags:
+            - { name: kernel.event_subscriber }
+
     use_case.create_customer:
         class: AppBundle\UseCase\CreateCustomerUseCase
         arguments:

@@ -6,7 +6,6 @@ use AppBundle\Repository\CustomerRepository;
 use AppBundle\UseCase\CreateCustomerUseCase;
 use AppBundle\UseCase\Exception\UsernameTakenException;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -24,11 +23,6 @@ class ManageCustomersCommand extends Command
      * @var CreateCustomerUseCase
      */
     private $creationUseCase;
-
-    /**
-     * @var QuestionHelper
-     */
-    private $questionHelper;
 
     /**
      * @param CreateCustomerUseCase $creationUseCase
@@ -57,11 +51,9 @@ class ManageCustomersCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->questionHelper = $this->getHelper('question');
-
         $this->assembleCustomerTable($output)->render();
 
-        if (!$this->questionHelper->ask(
+        if (!$this->getHelper('question')->ask(
             $input, $output, new ConfirmationQuestion('Do you want to create a new customer? ', false)
         )) {
             return 0;
@@ -99,7 +91,7 @@ class ManageCustomersCommand extends Command
      */
     private function createCustomerFlow(InputInterface $input, OutputInterface $output)
     {
-        $username = $this->questionHelper->ask(
+        $username = $this->getHelper('question')->ask(
             $input, $output, new Question('Enter the new customer username: ')
         );
 
