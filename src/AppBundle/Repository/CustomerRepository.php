@@ -7,8 +7,19 @@ use Doctrine\ORM\EntityRepository;
 
 class CustomerRepository extends EntityRepository
 {
-    public function add(Customer $customer)
+    /**
+     * @param string $username
+     *
+     * @return Customer|null
+     */
+    public function findOneByUsername($username)
     {
-        $this->_em->persist($customer);
+        $query = $this->_em->createQuery('
+            SELECT c
+              FROM AppBundle:Customer c
+             WHERE c.username = :username
+        ')->setParameter('username', $username);
+
+        return $query->getSingleResult();
     }
 }

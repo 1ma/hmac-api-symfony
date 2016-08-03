@@ -2,11 +2,19 @@
 
 namespace Tests\AppBundle\UseCase;
 
+use AppBundle\Entity\Customer;
+use AppBundle\Repository\CustomerRepository;
 use AppBundle\UseCase\CreateCustomerUseCase;
-use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use AppBundle\UseCase\Exception\UsernameTakenException;
+use Tests\Util\DatabaseTestCase;
 
-class CreateCustomerUseCaseTest extends KernelTestCase
+class CreateCustomerUseCaseTest extends DatabaseTestCase
 {
+    /**
+     * @var CustomerRepository
+     */
+    private $repository;
+
     /**
      * @var CreateCustomerUseCase
      */
@@ -14,14 +22,38 @@ class CreateCustomerUseCaseTest extends KernelTestCase
 
     protected function setUp()
     {
-        self::bootKernel();
+        parent::setUp();
+
+        $this->repository = self::$kernel->getContainer()
+            ->get('repo.customer');
 
         $this->useCase = self::$kernel->getContainer()
             ->get('use_case.create_customer');
     }
 
-    protected function tearDown()
+    /**
+     * @test
+     */
+    public function customerPersistence()
     {
-        parent::tearDown();
+        $this->useCase->execute('jdoe');
+
+        $jdoe = $this->repository
+            ->findOneByUsername('jdoe');
+
+        $this->assertInstanceOf(Customer::class, $jdoe);
+    }
+
+    /**
+     * @test
+     */
+    public function usernameIsUniqueAmongCustomers()
+    {
+        $this->expectException(UsernameTakenException::class);
+        $this->expectExceptionMessage('Username "jdoe" is already used by another customer');
+
+        $this->useCase->execute('jdoe');
+        $this->useCase->execute('el_barto');
+        $this->useCase->execute('jdoe');
     }
 }

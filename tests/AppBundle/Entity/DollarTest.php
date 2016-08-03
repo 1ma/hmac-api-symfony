@@ -17,18 +17,18 @@ class DollarTest extends \PHPUnit_Framework_TestCase
     {
         $dollar = new Dollar($amount);
 
-        $this->assertSame((string)$dollar, $expected);
+        $this->assertSame((string) $dollar, $expected);
     }
 
     public function serializationProvider()
     {
         return [
-            'penniless' =>      [0,         '$0.00'],
-            'one cent' =>       [1,         '$0.01'],
-            'thirteen cents' => [13,        '$0.13'],
-            'one dollar' =>     [100,       '$1.00'],
-            'some 2k' =>        [189327,    '$1,893.27'],
-            'million + cent' => [100000001, '$1,000,000.01']
+            'penniless' => [0, '$0.00'],
+            'one cent' => [1, '$0.01'],
+            'thirteen cents' => [13, '$0.13'],
+            'one dollar' => [100, '$1.00'],
+            'some 2k' => [189327, '$1,893.27'],
+            'million + cent' => [100000001, '$1,000,000.01'],
         ];
     }
 

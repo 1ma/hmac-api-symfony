@@ -1,5 +1,29 @@
 services:
+    cmd.manage_customers:
+        class: AppBundle\Command\ManageCustomersCommand
+        arguments:
+            - '@use_case.create_customer'
+            - '@repo.customer'
+        tags:
+            - { name: console.command }
+
+    repo.customer:
+        class: AppBundle\Repository\CustomerRepository
+        factory:
+            - '@doctrine.orm.default_entity_manager'
+            - 'getRepository'
+        arguments:
+            - 'AppBundle:Customer'
+
     use_case.create_customer:
         class: AppBundle\UseCase\CreateCustomerUseCase
+        arguments:
+            - '@doctrine.orm.default_entity_manager'
+    use_case.place_order:
+        class: AppBundle\UseCase\PlaceOrderUseCase
+        arguments:
+            - '@doctrine.orm.default_entity_manager'
+    use_case.update_shipping_address:
+        class: AppBundle\UseCase\UpdateShippingAddressUseCase
         arguments:
             - '@doctrine.orm.default_entity_manager'

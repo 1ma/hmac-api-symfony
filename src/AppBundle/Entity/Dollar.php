@@ -27,7 +27,6 @@ class Dollar
 
     public function __toString()
     {
-        return '$'.number_format($this->amount/100, 2, '.', ',');
+        return '$'.number_format($this->amount / 100, 2, '.', ',');
     }
 }
-

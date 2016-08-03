@@ -7,8 +7,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use UMA\Psr7HmacBundle\Definition\ApiClientInterface;
 
 /**
- * @ORM\Table(name="customers")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\CustomerRepository")
+ * @ORM\Table(name="customers")
  */
 class Customer implements UserInterface, ApiClientInterface
 {
@@ -152,4 +152,3 @@ class Customer implements UserInterface, ApiClientInterface
         return;
     }
 }
-

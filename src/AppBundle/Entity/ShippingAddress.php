@@ -35,10 +35,15 @@ class ShippingAddress
      * @param string $city
      * @param string $place
      */
-    public function __construct(string $country, string $city, string $place)
+    public function __construct($country, $city, $place)
     {
         $this->country = $country;
         $this->city = $city;
         $this->place = $place;
+    }
+
+    public function __toString()
+    {
+        return sprintf('%s, %s, %s', $this->country, $this->city, $this->place);
     }
 }

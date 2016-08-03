@@ -3,13 +3,10 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
- * ProductOrder
- *
- * @ORM\Table(name="product_orders")
  * @ORM\Entity()
+ * @ORM\Table(name="product_orders")
  */
 class ProductOrder
 {
@@ -105,4 +102,3 @@ class ProductOrder
         $this->orderDate = new \DateTime('today');
     }
 }
-

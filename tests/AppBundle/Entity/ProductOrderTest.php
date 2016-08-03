@@ -14,7 +14,7 @@ class ProductOrderTest extends \PHPUnit_Framework_TestCase
      */
     public function correctProductOrderPlacement()
     {
-        $buyer = new Customer('hjsimpson');
+        $buyer = new Customer('el_barto');
         $buyer->updateShippingAddress(new ShippingAddress('US', 'Springfield', '742 Evergreen Terrace'));
 
         new ProductOrder($buyer, '777-456', 1, new Dollar(7515), new Dollar(150), new \DateTime('tomorrow'));
@@ -39,7 +39,7 @@ class ProductOrderTest extends \PHPUnit_Framework_TestCase
     {
         $this->expectException(\DomainException::class);
 
-        $buyer = new Customer('hjsimpson');
+        $buyer = new Customer('el_barto');
         $buyer->updateShippingAddress(new ShippingAddress('US', 'Springfield', '742 Evergreen Terrace'));
 
         new ProductOrder($buyer, '738-285', 2, new Dollar(2998), new Dollar(0), new \DateTime('yesterday'));
@@ -52,7 +52,7 @@ class ProductOrderTest extends \PHPUnit_Framework_TestCase
     {
         $this->expectException(\DomainException::class);
 
-        $buyer = new Customer('hjsimpson');
+        $buyer = new Customer('el_barto');
         $buyer->updateShippingAddress(new ShippingAddress('US', 'Springfield', '742 Evergreen Terrace'));
 
         new ProductOrder($buyer, '738-285', 0, new Dollar(1499), new Dollar(0), new \DateTime('tomorrow'));
