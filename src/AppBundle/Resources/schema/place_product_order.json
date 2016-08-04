@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "type": "object",
+  "properties": {
+    "product_reference": {
+      "type": "string",
+      "minLength": 6,
+      "maxLength": 6,
+      "pattern": "^#[0-9]+$"
+    },
+    "quantity": {
+      "type": "integer",
+      "minimum": 1
+    }
+  },
+  "required": [],
+  "additionalProperties": false
+}

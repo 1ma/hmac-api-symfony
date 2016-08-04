@@ -6,6 +6,7 @@ imports:
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en
+    schema_path: "file:///var/www/sample-api.dev/src/AppBundle/Resources/schema"
 
 framework:
     #esi:             ~

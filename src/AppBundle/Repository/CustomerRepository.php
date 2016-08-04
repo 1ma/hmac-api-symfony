@@ -24,6 +24,22 @@ class CustomerRepository extends EntityRepository
     }
 
     /**
+     * @param string $apiKey
+     *
+     * @return Customer|null
+     */
+    public function findOneByApiKey(string $apiKey)
+    {
+        $query = $this->_em->createQuery('
+            SELECT c
+              FROM AppBundle:Customer c
+             WHERE c.apiKey = :apiKey
+        ')->setParameter('apiKey', $apiKey);
+
+        return $query->getSingleResult();
+    }
+
+    /**
      * @return Customer[]
      */
     public function findAll()

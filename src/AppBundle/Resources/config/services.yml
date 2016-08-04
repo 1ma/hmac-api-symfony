@@ -18,8 +18,14 @@ services:
         arguments:
             - 'AppBundle:ProductOrder'
 
-    subs.json_pescada:
-        class: AppBundle\EventListener\JsonGuard
+    subs.bad_json_req:
+        class: AppBundle\EventListener\BadJsonRequestExceptionListener
+        tags:
+            - { name: kernel.event_subscriber }
+    subs.json_req:
+        class: AppBundle\EventListener\JsonRequestListener
+        arguments:
+            - '@service_container'
         tags:
             - { name: kernel.event_subscriber }
 
@@ -35,3 +41,31 @@ services:
         class: AppBundle\UseCase\UpdateShippingAddressUseCase
         arguments:
             - '@doctrine.orm.default_entity_manager'
+
+    json.uri_retriever:
+        class: JsonSchema\Uri\UriRetriever
+        public: false
+    json.uri_resolver:
+        class: JsonSchema\Uri\UriResolver
+        public: false
+    json.ref_resolver:
+        class: JsonSchema\RefResolver
+        public: false
+        arguments:
+            - '@json.uri_retriever'
+            - '@json.uri_resolver'
+    json_schema.update_shipping_address:
+        class: \stdClass
+        factory: ['@json.ref_resolver', 'resolve']
+        arguments:
+            - '%schema_path%/update_shipping_address.json'
+    json_schema.place_product_order:
+        class: \stdClass
+        factory: ['@json.ref_resolver', 'resolve']
+        arguments:
+            - '%schema_path%/place_product_order.json'
+
+    sec.customer_provider:
+        class: AppBundle\Security\CustomerProvider
+        arguments:
+            - '@repo.customer'
