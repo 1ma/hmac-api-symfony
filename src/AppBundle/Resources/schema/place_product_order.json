@@ -13,6 +13,6 @@
       "minimum": 1
     }
   },
-  "required": [],
+  "required": ["product_reference", "quantity"],
   "additionalProperties": false
 }
