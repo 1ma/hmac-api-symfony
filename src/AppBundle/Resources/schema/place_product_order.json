@@ -13,6 +13,9 @@
       "minimum": 1
     }
   },
-  "required": ["product_reference", "quantity"],
+  "required": [
+    "product_reference",
+    "quantity"
+  ],
   "additionalProperties": false
 }
