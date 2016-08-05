@@ -10,5 +10,5 @@ security:
         hmac_api:
             stateless: true
             simple_preauth:
-                authenticator: uma.hmac_auth
+                authenticator: sec.hmac_auth
             provider: customer_provider

@@ -6,6 +6,12 @@ services:
             - '@repo.customer'
         tags:
             - { name: console.command }
+    cmd.api.update_shipping_address:
+            class: AppBundle\Command\Api\UpdateShippingAddressCommand
+            arguments:
+                - '@repo.customer'
+            tags:
+                - { name: console.command }
 
     repo.customer:
         class: AppBundle\Repository\CustomerRepository
@@ -65,7 +71,15 @@ services:
         arguments:
             - '%schema_path%/place_product_order.json'
 
+    sec.verifier:
+        class: UMA\Psr7Hmac\Verifier
+        public: false
     sec.customer_provider:
         class: AppBundle\Security\CustomerProvider
         arguments:
             - '@repo.customer'
+    sec.hmac_auth:
+        class: AppBundle\Security\Psr7HmacAuthenticator
+        arguments:
+            - 'Api-Key'
+            - '@sec.verifier'

@@ -4,6 +4,7 @@ namespace AppBundle\Repository;
 
 use AppBundle\Entity\Customer;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\NoResultException;
 
 class CustomerRepository extends EntityRepository
 {
@@ -20,7 +21,11 @@ class CustomerRepository extends EntityRepository
              WHERE c.username = :username
         ')->setParameter('username', $username);
 
-        return $query->getSingleResult();
+        try {
+            return $query->getSingleResult();
+        } catch (NoResultException $e) {
+            return null;
+        }
     }
 
     /**
@@ -36,7 +41,11 @@ class CustomerRepository extends EntityRepository
              WHERE c.apiKey = :apiKey
         ')->setParameter('apiKey', $apiKey);
 
-        return $query->getSingleResult();
+        try {
+            return $query->getSingleResult();
+        } catch (NoResultException $e) {
+            return null;
+        }
     }
 
     /**

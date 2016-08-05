@@ -2,15 +2,15 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Security\ApiUserInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
-use UMA\Psr7HmacBundle\Definition\ApiClientInterface;
 
 /**
  * @ORM\Entity(repositoryClass="AppBundle\Repository\CustomerRepository")
  * @ORM\Table(name="customers")
  */
-class Customer implements UserInterface, ApiClientInterface
+class Customer implements UserInterface, ApiUserInterface
 {
     // A 18 byte sequence produces a 24 character long
     // base64 string with no padding (trailing equal signs).
