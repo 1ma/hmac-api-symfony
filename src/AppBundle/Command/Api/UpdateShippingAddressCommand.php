@@ -34,12 +34,12 @@ class UpdateShippingAddressCommand extends ApiCommand
             'http://api.whalesale.com/shipping-address',
             [
                 'Api-Key' => $customer->getApiKey(),
-                'Content-Type' => 'application/json'
+                'Content-Type' => 'application/json',
             ],
             json_encode([
                 'country' => 'ES',
                 'city' => 'Barcelona',
-                'place' => 'el camp de la bota'
+                'place' => 'el camp de la bota',
             ])
         );
 

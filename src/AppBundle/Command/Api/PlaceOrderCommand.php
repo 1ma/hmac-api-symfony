@@ -34,11 +34,11 @@ class PlaceOrderCommand extends ApiCommand
             'http://api.whalesale.com/orders',
             [
                 'Api-Key' => $customer->getApiKey(),
-                'Content-Type' => 'application/json'
+                'Content-Type' => 'application/json',
             ],
             json_encode([
                 'product_reference' => '#66666',
-                'quantity' => 10
+                'quantity' => 10,
             ])
         );
 

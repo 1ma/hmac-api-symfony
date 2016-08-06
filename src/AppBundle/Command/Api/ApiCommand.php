@@ -23,20 +23,20 @@ abstract class ApiCommand extends Command
     protected $httpClient;
 
     /**
-     * @param CustomerRepository    $customerRepository
+     * @param CustomerRepository $customerRepository
      */
     public function __construct(CustomerRepository $customerRepository)
     {
         $this->customerRepository = $customerRepository;
         $this->httpClient = new Client([
-            RequestOptions::HTTP_ERRORS => false
+            RequestOptions::HTTP_ERRORS => false,
         ]);
 
         parent::__construct();
     }
 
     /**
-     * @param InputInterface $input
+     * @param InputInterface  $input
      * @param OutputInterface $output
      *
      * @return Customer

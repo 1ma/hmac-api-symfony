@@ -24,7 +24,7 @@ class CustomerRepository extends EntityRepository
         try {
             return $query->getSingleResult();
         } catch (NoResultException $e) {
-            return null;
+            return;
         }
     }
 
@@ -44,7 +44,7 @@ class CustomerRepository extends EntityRepository
         try {
             return $query->getSingleResult();
         } catch (NoResultException $e) {
-            return null;
+            return;
         }
     }
 

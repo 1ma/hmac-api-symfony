@@ -4,7 +4,6 @@ namespace AppBundle\Security;
 
 use AppBundle\Entity\Customer;
 use AppBundle\Repository\CustomerRepository;
-use Doctrine\ORM\NoResultException;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
