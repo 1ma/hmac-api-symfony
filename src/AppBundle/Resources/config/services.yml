@@ -7,11 +7,17 @@ services:
         tags:
             - { name: console.command }
     cmd.api.update_shipping_address:
-            class: AppBundle\Command\Api\UpdateShippingAddressCommand
-            arguments:
-                - '@repo.customer'
-            tags:
-                - { name: console.command }
+        class: AppBundle\Command\Api\UpdateShippingAddressCommand
+        arguments:
+            - '@repo.customer'
+        tags:
+            - { name: console.command }
+    cmd.api.place_order:
+        class: AppBundle\Command\Api\PlaceOrderCommand
+        arguments:
+            - '@repo.customer'
+        tags:
+            - { name: console.command }
 
     repo.customer:
         class: AppBundle\Repository\CustomerRepository

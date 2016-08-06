@@ -8,7 +8,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use UMA\Psr7Hmac\Internal\MessageSerializer;
 use UMA\Psr7Hmac\Signer;
 
-class UpdateShippingAddressCommand extends ApiCommand
+class PlaceOrderCommand extends ApiCommand
 {
     /**
      * {@inheritdoc}
@@ -16,8 +16,8 @@ class UpdateShippingAddressCommand extends ApiCommand
     protected function configure()
     {
         $this
-            ->setName('api:update-shipping-address')
-            ->setDescription('Update a Customer shipping address through the HMAC API');
+            ->setName('api:place-order')
+            ->setDescription('Place a new product order through the HMAC API');
     }
 
     /**
@@ -30,16 +30,15 @@ class UpdateShippingAddressCommand extends ApiCommand
 
         // assemble psr7 request
         $request = new Request(
-            'PUT',
-            'http://api.whalesale.com/shipping-address',
+            'POST',
+            'http://api.whalesale.com/orders',
             [
                 'Api-Key' => $customer->getApiKey(),
                 'Content-Type' => 'application/json'
             ],
             json_encode([
-                'country' => 'ES',
-                'city' => 'Barcelona',
-                'place' => 'el camp de la bota'
+                'product_reference' => '#66666',
+                'quantity' => 10
             ])
         );
 
