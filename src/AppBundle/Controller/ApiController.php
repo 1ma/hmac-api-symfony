@@ -54,6 +54,26 @@ class ApiController extends Controller
      */
     public function listProductOrdersAction()
     {
+        /** @var Customer $customer */
+        $customer = $this->getUser();
+
+        $orders = $this->get('repo.product_order')
+            ->findByBuyer($customer);
+
+        $data = [];
+
+        foreach ($orders as $order) {
+            $data[] = [
+                'product_reference' => $order->getProductReference(),
+                'quantity' => $order->getQuantity(),
+                'price' => (string) $order->getPrice(),
+                'fees' => (string) $order->getFees(),
+                'order_date' => $order->getOrderDate(),
+                'delivery_date' => $order->getDeliveryDate(),
+            ];
+        }
+
+        return new JsonResponse($data);
     }
 
     /**

@@ -1,8 +1,14 @@
 services:
-    cmd.manage_customers:
+    cmd.app.manage_customers:
         class: AppBundle\Command\ManageCustomersCommand
         arguments:
             - '@use_case.create_customer'
+            - '@repo.customer'
+        tags:
+            - { name: console.command }
+    cmd.api.list_orders:
+        class: AppBundle\Command\Api\ListOrdersCommand
+        arguments:
             - '@repo.customer'
         tags:
             - { name: console.command }

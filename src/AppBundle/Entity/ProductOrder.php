@@ -101,4 +101,52 @@ class ProductOrder
         $this->deliveryDate = $deliveryDate;
         $this->orderDate = new \DateTime('today');
     }
+
+    /**
+     * @return string
+     */
+    public function getProductReference()
+    {
+        return $this->productReference;
+    }
+
+    /**
+     * @return int
+     */
+    public function getQuantity()
+    {
+        return $this->quantity;
+    }
+
+    /**
+     * @return Dollar
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * @return Dollar
+     */
+    public function getFees()
+    {
+        return $this->fees;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDeliveryDate()
+    {
+        return $this->deliveryDate;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getOrderDate()
+    {
+        return $this->orderDate;
+    }
 }
