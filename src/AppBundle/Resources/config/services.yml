@@ -95,3 +95,8 @@ services:
         arguments:
             - 'Api-Key'
             - '@sec.verifier'
+
+    ser.norm.product_order:
+        class: AppBundle\Serializer\ProductOrderNormalizer
+        tags:
+            - { name: serializer.normalizer }

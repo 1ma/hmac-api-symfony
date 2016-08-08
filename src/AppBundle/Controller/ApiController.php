@@ -60,27 +60,8 @@ class ApiController extends Controller
         $orders = $this->get('repo.product_order')
             ->findByBuyer($customer);
 
-        $data = [];
-
-        foreach ($orders as $order) {
-            $data[] = [
-                'product_reference' => $order->getProductReference(),
-                'quantity' => $order->getQuantity(),
-                'price' => (string) $order->getPrice(),
-                'fees' => (string) $order->getFees(),
-                'order_date' => $order->getOrderDate(),
-                'delivery_date' => $order->getDeliveryDate(),
-            ];
-        }
-
-        return new JsonResponse($data);
-    }
-
-    /**
-     * @Method("GET")
-     * @Route("/orders/{id}", name="inspect_product_order")
-     */
-    public function inspectProductOrderAction($id)
-    {
+        return new JsonResponse(
+            $this->get('serializer')->normalize($orders)
+        );
     }
 }
