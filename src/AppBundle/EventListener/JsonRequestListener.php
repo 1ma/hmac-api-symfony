@@ -33,7 +33,7 @@ class JsonRequestListener implements EventSubscriberInterface
         $request = $event->getRequest();
         $route = $request->attributes->get('_route');
 
-        if (null !== $schema = $this->container->get("json_schema.$route", ContainerInterface::NULL_ON_INVALID_REFERENCE)) {
+        if (null !== $schema = $this->container->get("schemas.$route", ContainerInterface::NULL_ON_INVALID_REFERENCE)) {
             $validator = new Validator();
             $validator->check($data = json_decode($request->getContent()), $schema);
 

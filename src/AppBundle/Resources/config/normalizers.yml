@@ -1,0 +1,5 @@
+services:
+    norm.product_order:
+        class: AppBundle\Serializer\ProductOrderNormalizer
+        tags:
+            - { name: serializer.normalizer }

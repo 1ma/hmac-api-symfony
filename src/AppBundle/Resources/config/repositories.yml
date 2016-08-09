@@ -1,0 +1,11 @@
+services:
+    repo.customer:
+        class: AppBundle\Repository\CustomerRepository
+        factory: ['@doctrine.orm.default_entity_manager', 'getRepository']
+        arguments:
+            - 'AppBundle:Customer'
+    repo.product_order:
+        class: AppBundle\Repository\ProductOrderRepository
+        factory: ['@doctrine.orm.default_entity_manager', 'getRepository']
+        arguments:
+            - 'AppBundle:ProductOrder'
