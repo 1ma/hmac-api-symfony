@@ -8,7 +8,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use UMA\Psr7Hmac\Internal\MessageSerializer;
 use UMA\Psr7Hmac\Signer;
 
-class PlaceOrderCommand extends ApiCommand
+class PlaceOrderCommand extends AbstractApiCommand
 {
     /**
      * {@inheritdoc}
@@ -30,8 +30,7 @@ class PlaceOrderCommand extends ApiCommand
 
         // assemble psr7 request
         $request = new Request(
-            'POST',
-            'http://api.whalesale.com/orders',
+            'POST', "$this->host/orders",
             [
                 'Api-Key' => $customer->getApiKey(),
                 'Content-Type' => 'application/json',

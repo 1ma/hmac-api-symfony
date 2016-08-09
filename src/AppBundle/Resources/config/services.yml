@@ -9,18 +9,21 @@ services:
     cmd.api.list_orders:
         class: AppBundle\Command\Api\ListOrdersCommand
         arguments:
+            - '%api_host%'
             - '@repo.customer'
         tags:
             - { name: console.command }
     cmd.api.update_shipping_address:
         class: AppBundle\Command\Api\UpdateShippingAddressCommand
         arguments:
+            - '%api_host%'
             - '@repo.customer'
         tags:
             - { name: console.command }
     cmd.api.place_order:
         class: AppBundle\Command\Api\PlaceOrderCommand
         arguments:
+            - '%api_host%'
             - '@repo.customer'
         tags:
             - { name: console.command }

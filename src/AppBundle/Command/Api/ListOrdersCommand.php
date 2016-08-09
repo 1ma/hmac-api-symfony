@@ -8,7 +8,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use UMA\Psr7Hmac\Internal\MessageSerializer;
 use UMA\Psr7Hmac\Signer;
 
-class ListOrdersCommand extends ApiCommand
+class ListOrdersCommand extends AbstractApiCommand
 {
     /**
      * {@inheritdoc}
@@ -30,8 +30,7 @@ class ListOrdersCommand extends ApiCommand
 
         // assemble psr7 request
         $request = new Request(
-            'GET',
-            'http://api.whalesale.com/orders',
+            'GET', "$this->host/orders",
             ['Api-Key' => $customer->getApiKey()]
         );
 

@@ -8,7 +8,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use UMA\Psr7Hmac\Internal\MessageSerializer;
 use UMA\Psr7Hmac\Signer;
 
-class UpdateShippingAddressCommand extends ApiCommand
+class UpdateShippingAddressCommand extends AbstractApiCommand
 {
     /**
      * {@inheritdoc}
@@ -30,8 +30,7 @@ class UpdateShippingAddressCommand extends ApiCommand
 
         // assemble psr7 request
         $request = new Request(
-            'PUT',
-            'http://api.whalesale.com/shipping-address',
+            'PUT', "$this->host/shipping-address",
             [
                 'Api-Key' => $customer->getApiKey(),
                 'Content-Type' => 'application/json',

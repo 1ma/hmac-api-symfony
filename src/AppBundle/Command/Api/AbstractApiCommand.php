@@ -10,7 +10,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-abstract class ApiCommand extends Command
+abstract class AbstractApiCommand extends Command
 {
     /**
      * @var CustomerRepository
@@ -18,15 +18,22 @@ abstract class ApiCommand extends Command
     private $customerRepository;
 
     /**
+     * @var string
+     */
+    protected $host;
+
+    /**
      * @var Client
      */
     protected $httpClient;
 
     /**
+     * @param string             $host
      * @param CustomerRepository $customerRepository
      */
-    public function __construct(CustomerRepository $customerRepository)
+    public function __construct($host, CustomerRepository $customerRepository)
     {
+        $this->host = $host;
         $this->customerRepository = $customerRepository;
         $this->httpClient = new Client([
             RequestOptions::HTTP_ERRORS => false,
