@@ -1,14 +1,15 @@
 security:
     providers:
         customer_provider:
-            id: sec.customer_provider
+            entity:
+                class: AppBundle\Entity\Customer
+                property: apiKey
 
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt|homepage)|css|images|js)/
             security: false
         hmac_api:
-            stateless: true
-            simple_preauth:
-                authenticator: sec.hmac_auth
+            hmac: true
             provider: customer_provider
+            stateless: true

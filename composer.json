@@ -2,12 +2,6 @@
     "name": "uma/hmac-api-symfony",
     "license": "MIT",
     "type": "project",
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/1ma/UMAPsr7HmacBundle"
-        }
-    ],
     "autoload": {
         "psr-4": {
             "": "src/"
