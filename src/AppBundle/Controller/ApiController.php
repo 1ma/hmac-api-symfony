@@ -9,12 +9,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use UMA\SchemaBundle\Annotation\JsonSchema;
 
 class ApiController extends Controller
 {
     /**
      * @Method("PUT")
      * @Route("/shipping-address", name="update_shipping_address")
+     * @JsonSchema(uri="update_shipping_address.json")
      */
     public function updateShippingAddressAction(Request $request)
     {
@@ -31,6 +33,7 @@ class ApiController extends Controller
     /**
      * @Method("POST")
      * @Route("/orders", name="place_product_order")
+     * @JsonSchema(uri="place_product_order.json")
      */
     public function placeProductOrderAction(Request $request)
     {

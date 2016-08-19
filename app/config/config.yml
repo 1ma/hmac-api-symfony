@@ -6,7 +6,6 @@ imports:
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en
-    schema_path: "file:///var/www/api.whalesale.dev/src/AppBundle/Resources/schema" # TODO refactor this ugly abs path
 
 framework:
     #esi:             ~

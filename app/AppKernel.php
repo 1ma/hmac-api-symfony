@@ -16,6 +16,7 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
 
             new UMA\Psr7HmacBundle\UMAPsr7HmacBundle(),
+            new UMA\SchemaBundle\UMASchemaBundle(),
 
             new AppBundle\AppBundle(),
         ];

@@ -30,8 +30,8 @@
         "incenteev/composer-parameter-handler": "^2.0",
 
         "uma/psr7-hmac-bundle": "dev-master",
-        "guzzlehttp/guzzle": "^6.2",
-        "justinrainbow/json-schema": "^2.0"
+        "uma/schema-bundle": "dev-master",
+        "guzzlehttp/guzzle": "^6.2"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
