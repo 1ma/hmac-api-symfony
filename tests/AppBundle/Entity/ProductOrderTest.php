@@ -5,7 +5,9 @@ namespace Tests\AppBundle\Entity;
 use AppBundle\Entity\Customer;
 use AppBundle\Entity\Dollar;
 use AppBundle\Entity\ProductOrder;
+use AppBundle\Entity\ProductReference;
 use AppBundle\Entity\ShippingAddress;
+use AppBundle\Entity\Username;
 
 class ProductOrderTest extends \PHPUnit_Framework_TestCase
 {
@@ -14,10 +16,10 @@ class ProductOrderTest extends \PHPUnit_Framework_TestCase
      */
     public function correctProductOrderPlacement()
     {
-        $buyer = new Customer('el_barto');
+        $buyer = new Customer(new Username('el_barto'));
         $buyer->updateShippingAddress(new ShippingAddress('US', 'Springfield', '742 Evergreen Terrace'));
 
-        new ProductOrder($buyer, '777-456', 1, new Dollar(7515), new Dollar(150), new \DateTime('tomorrow'));
+        new ProductOrder($buyer, new ProductReference('777456'), 1, new Dollar(7515), new Dollar(150), new \DateTime('tomorrow'));
     }
 
     /**
@@ -27,9 +29,9 @@ class ProductOrderTest extends \PHPUnit_Framework_TestCase
     {
         $this->expectException(\DomainException::class);
 
-        $buyer = new Customer('jdoe');
+        $buyer = new Customer(new Username('jdoe'));
 
-        new ProductOrder($buyer, '738-285', 1, new Dollar(1499), new Dollar(0), new \DateTime('tomorrow'));
+        new ProductOrder($buyer, new ProductReference('738285'), 1, new Dollar(1499), new Dollar(0), new \DateTime('tomorrow'));
     }
 
     /**
@@ -39,10 +41,10 @@ class ProductOrderTest extends \PHPUnit_Framework_TestCase
     {
         $this->expectException(\DomainException::class);
 
-        $buyer = new Customer('el_barto');
+        $buyer = new Customer(new Username('el_barto'));
         $buyer->updateShippingAddress(new ShippingAddress('US', 'Springfield', '742 Evergreen Terrace'));
 
-        new ProductOrder($buyer, '738-285', 2, new Dollar(2998), new Dollar(0), new \DateTime('yesterday'));
+        new ProductOrder($buyer, new ProductReference('738285'), 2, new Dollar(2998), new Dollar(0), new \DateTime('yesterday'));
     }
 
     /**
@@ -52,9 +54,9 @@ class ProductOrderTest extends \PHPUnit_Framework_TestCase
     {
         $this->expectException(\DomainException::class);
 
-        $buyer = new Customer('el_barto');
+        $buyer = new Customer(new Username('el_barto'));
         $buyer->updateShippingAddress(new ShippingAddress('US', 'Springfield', '742 Evergreen Terrace'));
 
-        new ProductOrder($buyer, '738-285', 0, new Dollar(1499), new Dollar(0), new \DateTime('tomorrow'));
+        new ProductOrder($buyer, new ProductReference('738285'), 0, new Dollar(1499), new Dollar(0), new \DateTime('tomorrow'));
     }
 }

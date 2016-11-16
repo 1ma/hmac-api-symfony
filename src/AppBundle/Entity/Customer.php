@@ -55,11 +55,11 @@ class Customer implements HmacApiUserInterface
     private $sharedSecret;
 
     /**
-     * @param string $username
+     * @param Username $username
      */
-    public function __construct(string $username)
+    public function __construct(Username $username)
     {
-        $this->username = $username;
+        $this->username = (string) $username;
         $this->shippingAddress = null;
         $this->apiKey = base64_encode(random_bytes(static::BYTES_OF_ENTROPY));
         $this->sharedSecret = base64_encode(random_bytes(static::BYTES_OF_ENTROPY));

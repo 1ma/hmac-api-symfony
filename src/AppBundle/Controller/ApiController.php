@@ -3,6 +3,8 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Customer;
+use AppBundle\Entity\ProductReference;
+use AppBundle\Entity\ShippingAddress;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -24,8 +26,12 @@ class ApiController extends Controller
         $customer = $this->getUser();
         $data = json_decode($request->getContent(), true);
 
-        $this->get('use_case.update_shipping_address')
-            ->execute($customer, $data['country'], $data['city'], $data['place']);
+        try {
+            $this->get('use_case.update_shipping_address')
+                ->execute($customer, new ShippingAddress($data['country'], $data['city'], $data['place']));
+        } catch (\DomainException $e) {
+            return new JsonResponse(['error' => $e->getMessage()], Response::HTTP_FORBIDDEN);
+        }
 
         return new JsonResponse($data);
     }
@@ -43,7 +49,7 @@ class ApiController extends Controller
 
         try {
             $this->get('use_case.place_order')
-                ->execute($customer, $data['product_reference'], $data['quantity']);
+                ->execute($customer, new ProductReference($data['product_reference']), $data['quantity']);
         } catch (\DomainException $e) {
             return new JsonResponse(['error' => $e->getMessage()], Response::HTTP_FORBIDDEN);
         }

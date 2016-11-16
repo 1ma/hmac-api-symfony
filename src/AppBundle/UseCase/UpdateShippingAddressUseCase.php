@@ -22,15 +22,11 @@ class UpdateShippingAddressUseCase
     }
 
     /**
-     * @param Customer $customer
-     * @param string   $newCountry
-     * @param string   $newCity
-     * @param string   $newPlace
+     * @param Customer        $customer
+     * @param ShippingAddress $newShippingAddress
      */
-    public function execute(Customer $customer, string $newCountry, string $newCity, string $newPlace)
+    public function execute(Customer $customer, ShippingAddress $newShippingAddress)
     {
-        $newShippingAddress = new ShippingAddress($newCountry, $newCity, $newPlace);
-
         $this->em->transactional(function () use ($customer, $newShippingAddress) {
             $customer->updateShippingAddress($newShippingAddress);
         });

@@ -3,6 +3,8 @@
 namespace Tests\AppBundle\UseCase;
 
 use AppBundle\Entity\Customer;
+use AppBundle\Entity\ShippingAddress;
+use AppBundle\Entity\Username;
 use AppBundle\Repository\CustomerRepository;
 use AppBundle\UseCase\UpdateShippingAddressUseCase;
 use Tests\Util\DatabaseTestCase;
@@ -35,10 +37,10 @@ class UpdateShippingAddressUseCaseTest extends DatabaseTestCase
      */
     public function correctShippingAddressUpdate()
     {
-        $this->em->persist($elBarto = new Customer('el_barto'));
+        $this->em->persist($elBarto = new Customer(new Username('el_barto')));
         $this->em->flush();
 
-        $this->useCase->execute($elBarto, 'US', 'Springfield', '742 Evergreen Terrace');
+        $this->useCase->execute($elBarto, new ShippingAddress('US', 'Springfield', '742 Evergreen Terrace'));
 
         $elBarto = $this->repository
             ->findOneByUsername('el_barto');

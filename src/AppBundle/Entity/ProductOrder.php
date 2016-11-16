@@ -70,16 +70,16 @@ class ProductOrder
     private $orderDate;
 
     /**
-     * @param Customer  $buyer
-     * @param string    $productReference
-     * @param int       $quantity
-     * @param Dollar    $price
-     * @param Dollar    $fees
-     * @param \DateTime $deliveryDate
+     * @param Customer         $buyer
+     * @param ProductReference $reference
+     * @param int              $quantity
+     * @param Dollar           $price
+     * @param Dollar           $fees
+     * @param \DateTime        $deliveryDate
      *
      * @throws \DomainException
      */
-    public function __construct(Customer $buyer, string $productReference, int $quantity, Dollar $price, Dollar $fees, \DateTime $deliveryDate)
+    public function __construct(Customer $buyer, ProductReference $reference, int $quantity, Dollar $price, Dollar $fees, \DateTime $deliveryDate)
     {
         if (0 >= $quantity) {
             throw new \DomainException('wai wat');
@@ -94,7 +94,7 @@ class ProductOrder
         }
 
         $this->buyer = $buyer;
-        $this->productReference = $productReference;
+        $this->productReference = (string) $reference;
         $this->quantity = $quantity;
         $this->price = $price;
         $this->fees = $fees;
@@ -103,11 +103,11 @@ class ProductOrder
     }
 
     /**
-     * @return string
+     * @return ProductReference
      */
     public function getProductReference()
     {
-        return $this->productReference;
+        return new ProductReference($this->productReference);
     }
 
     /**

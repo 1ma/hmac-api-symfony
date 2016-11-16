@@ -50,8 +50,8 @@ abstract class AbstractApiCommand extends Command
      */
     protected function chooseApiClient(InputInterface $input, OutputInterface $output)
     {
-        // TODO findAll and let the command user choose one. You can create 'el_barto'
-        // manually (bin/console app:manage-customers) or by running the unit tests.
+        // TODO findAll and let the command user choose one.
+        // You can create 'el_barto' manually (php bin/console app:manage-customers) or by running the unit tests.
         return $this->customerRepository
             ->findOneByUsername('el_barto');
     }

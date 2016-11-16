@@ -3,6 +3,7 @@
 namespace AppBundle\UseCase;
 
 use AppBundle\Entity\Customer;
+use AppBundle\Entity\Username;
 use AppBundle\UseCase\Exception\UsernameTakenException;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Doctrine\ORM\EntityManager;
@@ -23,18 +24,18 @@ class CreateCustomerUseCase
     }
 
     /**
-     * @param string $newUsername
+     * @param string $desiredUsername
      * 
      * @throws UsernameTakenException
      */
-    public function execute(string $newUsername)
+    public function execute(string $desiredUsername)
     {
         try {
-            $this->em->transactional(function () use ($newUsername) {
-                $this->em->persist(new Customer($newUsername));
+            $this->em->transactional(function () use ($desiredUsername) {
+                $this->em->persist(new Customer(new Username($desiredUsername)));
             });
         } catch (UniqueConstraintViolationException $e) {
-            throw new UsernameTakenException($newUsername, $e);
+            throw new UsernameTakenException($desiredUsername, $e);
         }
     }
 }

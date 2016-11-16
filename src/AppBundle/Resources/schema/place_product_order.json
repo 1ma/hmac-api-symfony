@@ -3,10 +3,7 @@
   "type": "object",
   "properties": {
     "product_reference": {
-      "type": "string",
-      "minLength": 6,
-      "maxLength": 6,
-      "pattern": "^#[0-9]+$"
+      "type": "string"
     },
     "quantity": {
       "type": "integer",

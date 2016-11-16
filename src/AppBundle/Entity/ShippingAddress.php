@@ -34,9 +34,15 @@ class ShippingAddress
      * @param string $country
      * @param string $city
      * @param string $place
+     *
+     * @throws \DomainException
      */
     public function __construct(string $country, string $city, string $place)
     {
+        if (!in_array($country, ['DE', 'ES', 'FR', 'GB', 'IT', 'PT', 'US'])) {
+            throw new \DomainException("we are currently unable to ship goods to '$country'");
+        }
+
         $this->country = $country;
         $this->city = $city;
         $this->place = $place;
