@@ -16,7 +16,7 @@ class ApiController extends Controller
     /**
      * @Method("PUT")
      * @Route("/shipping-address", name="update_shipping_address")
-     * @JsonSchema(uri="update_shipping_address.json")
+     * @JsonSchema(filename="update_shipping_address.json")
      */
     public function updateShippingAddressAction(Request $request)
     {
@@ -33,7 +33,7 @@ class ApiController extends Controller
     /**
      * @Method("POST")
      * @Route("/orders", name="place_product_order")
-     * @JsonSchema(uri="place_product_order.json")
+     * @JsonSchema(filename="place_product_order.json")
      */
     public function placeProductOrderAction(Request $request)
     {
