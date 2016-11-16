@@ -15,7 +15,7 @@ class ProductOrderNormalizer implements NormalizerInterface
     public function normalize($object, $format = null, array $context = array())
     {
         return [
-            'product_reference' => $object->getProductReference(),
+            'product_reference' => (string) $object->getProductReference(),
             'quantity' => $object->getQuantity(),
             'price' => (string) $object->getPrice(),
             'fees' => (string) $object->getFees(),

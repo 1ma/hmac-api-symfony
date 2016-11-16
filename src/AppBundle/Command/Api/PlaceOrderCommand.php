@@ -36,7 +36,7 @@ class PlaceOrderCommand extends AbstractApiCommand
                 'Content-Type' => 'application/json',
             ],
             json_encode([
-                'product_reference' => '#66666',
+                'product_reference' => '666666',
                 'quantity' => 10,
             ])
         );
