@@ -2,6 +2,7 @@
 
 namespace AppBundle\Command;
 
+use AppBundle\Entity\Username;
 use AppBundle\Repository\CustomerRepository;
 use AppBundle\UseCase\CreateCustomerUseCase;
 use AppBundle\UseCase\Exception\UsernameTakenException;
@@ -96,7 +97,11 @@ class ManageCustomersCommand extends Command
         );
 
         try {
-            $this->creationUseCase->execute($username);
+            $this->creationUseCase->execute(new Username($username));
+        } catch (\DomainException $e) {
+            $output->writeln("Sorry, username <error>$username</error> is too long");
+
+            return 1;
         } catch (UsernameTakenException $e) {
             $output->writeln("Sorry, username <error>$username</error> is already in use");
 

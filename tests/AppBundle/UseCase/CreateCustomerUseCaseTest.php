@@ -3,6 +3,7 @@
 namespace Tests\AppBundle\UseCase;
 
 use AppBundle\Entity\Customer;
+use AppBundle\Entity\Username;
 use AppBundle\Repository\CustomerRepository;
 use AppBundle\UseCase\CreateCustomerUseCase;
 use AppBundle\UseCase\Exception\UsernameTakenException;
@@ -36,7 +37,7 @@ class CreateCustomerUseCaseTest extends DatabaseTestCase
      */
     public function customerPersistence()
     {
-        $this->useCase->execute('jdoe');
+        $this->useCase->execute(new Username('jdoe'));
 
         $jdoe = $this->repository
             ->findOneByUsername('jdoe');
@@ -52,8 +53,8 @@ class CreateCustomerUseCaseTest extends DatabaseTestCase
         $this->expectException(UsernameTakenException::class);
         $this->expectExceptionMessage('Username "jdoe" is already used by another customer');
 
-        $this->useCase->execute('jdoe');
-        $this->useCase->execute('el_barto');
-        $this->useCase->execute('jdoe');
+        $this->useCase->execute(new Username('jdoe'));
+        $this->useCase->execute(new Username('el_barto'));
+        $this->useCase->execute(new Username('jdoe'));
     }
 }
